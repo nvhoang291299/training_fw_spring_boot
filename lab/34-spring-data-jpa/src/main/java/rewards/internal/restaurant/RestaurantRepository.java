@@ -23,5 +23,5 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
      * @return the restaurant
      */
     // To refactor: right click on the method name -> Refactor -> Rename
-    public Restaurant findByMerchantNumber(String merchantNumber);
+    public Restaurant findByNumber(String merchantNumber);
 }

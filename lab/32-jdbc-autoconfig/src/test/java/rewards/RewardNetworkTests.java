@@ -1,30 +1,33 @@
 package rewards;
 
-import common.money.MonetaryAmount;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import common.money.MonetaryAmount;
+
 /**
- * A system test that verifies the components of the RewardNetwork application work together to reward for dining
- * successfully. Uses Spring to bootstrap the application for use in a test environment.
+ * A system test that verifies the components of the RewardNetwork application
+ * work together to reward for dining successfully. Uses Spring to bootstrap the
+ * application for use in a test environment.
  */
 
 // TODO-09: Refactor this test code
-// - Run this test without making any change, it will fail - think about why it fails
-// - Replace the @ExtendWith and @ContextConfiguration annotations below with @SpringBootTest
-//   (There is no need to specify any configuration classes,
-//    because @SpringBootTest will find and use the configuration
-//    of RewardApplication automatically.)
+// - Run this test without making any change, it will fail - think about why it
+// fails
+// - Replace the @ExtendWith and @ContextConfiguration annotations below with
+// @SpringBootTest
+// (There is no need to specify any configuration classes,
+// because @SpringBootTest will find and use the configuration
+// of RewardApplication automatically.)
 // - Run the test, it should now pass.
 // - Think about where auto-configuration is enabled for the test.
-@ExtendWith(SpringExtension.class)                      // Replace me
-@ContextConfiguration(classes = {SystemTestConfig.class}) // Replace me
+// @ExtendWith(SpringExtension.class) // Replace me
+// @ContextConfiguration(classes = {SystemTestConfig.class}) // Replace me
+@SpringBootTest
 public class RewardNetworkTests {
 
     /**
@@ -35,7 +38,8 @@ public class RewardNetworkTests {
 
     @Test
     public void testRewardForDining() {
-        // create a new dining of 100.00 charged to credit card '1234123412341234' by merchant '123457890' as test input
+        // create a new dining of 100.00 charged to credit card
+        // '1234123412341234' by merchant '123457890' as test input
         Dining dining = Dining.createDining("100.00", "1234123412341234", "1234567890");
 
         // call the 'rewardNetwork' to test its rewardAccountFor(Dining) method
@@ -55,7 +59,8 @@ public class RewardNetworkTests {
         // the total contribution amount should be 8.00 (8% of 100.00)
         assertEquals(MonetaryAmount.valueOf("8.00"), contribution.getAmount());
 
-        // the total contribution amount should have been split into 2 distributions
+        // the total contribution amount should have been split into 2
+        // distributions
         assertEquals(2, contribution.getDistributions().size());
 
         // each distribution should be 4.00 (as both have a 50% allocation)
