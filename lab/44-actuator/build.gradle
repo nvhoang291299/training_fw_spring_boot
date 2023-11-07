@@ -4,11 +4,25 @@ dependencies {
     implementation project(':00-rewards-common')
     implementation project(':01-rewards-db')
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation "org.springframework.security:spring-security-config"
+    implementation "org.springframework.security:spring-security-web"
     // TO-DO-01: Note that the Actuator starter is already here for you.
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 }
 
 // TO-DO-07: Add BuildInfo task to the Spring Boot Gradle plugin
+springBoot {
+	buildInfo{
+		properties {
+            name = "actuator app"
+            additional = [
+                javaVersion:     System.properties['java.version'],
+                operatingSystem: "${System.properties['os.name']} (${System.properties['os.version']})"
+            ]
+        }
+	}
+}
 
 // TO-DO-08: Add additional properties of name, javaVersion, operatingSystem
